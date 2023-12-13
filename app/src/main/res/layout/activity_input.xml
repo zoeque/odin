@@ -1,13 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="新規単語登録"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp" />
     <EditText
-        android:id="@+id/edittext"
+        android:id="@+id/word"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter text here"
-        android:layout_centerInParent="true" />
+        android:hint="単語を入力"/>
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/meaning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="意味を入力"/>
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="登録" />
+
+    <Button
+        android:id="@+id/button_to_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:text="戻る"
+        android:textColor="#0000FF" />
+
+</LinearLayout>
