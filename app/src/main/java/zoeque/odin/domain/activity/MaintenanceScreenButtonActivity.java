@@ -1,6 +1,7 @@
 package zoeque.odin.domain.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.Switch;
 import androidx.appcompat.app.AppCompatActivity;
 
 import zoeque.odin.R;
+import zoeque.odin.domain.model.OdinSettingModel;
 
 public class MaintenanceScreenButtonActivity extends AppCompatActivity {
     private Boolean isRandom = false;
@@ -21,11 +23,21 @@ public class MaintenanceScreenButtonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintenance);
 
+
         // The listener for toggle button to set the random state
+        SharedPreferences randomOrderSetting = getSharedPreferences(OdinSettingModel.SETTING.getSettingModel(), 0);
         Switch toggleRandom = findViewById(R.id.toggleRandom);
+
+        // get the last status of the random order setting
+        boolean randomSetting
+                = randomOrderSetting.getBoolean(OdinSettingModel.RANDOM_ORDER.getSettingModel(), false);
+        toggleRandom.setChecked(randomSetting);
         toggleRandom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean input) {
-                isRandom = input;
+                SharedPreferences settings = getSharedPreferences(OdinSettingModel.SETTING.getSettingModel(), 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putBoolean(OdinSettingModel.RANDOM_ORDER.getSettingModel(), input);
+                editor.apply();
             }
         });
 
