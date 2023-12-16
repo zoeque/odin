@@ -9,7 +9,8 @@ public enum OdinSettingModel {
      */
     SETTING("setting"),
     RANDOM_ORDER("random_order"),
-    EXCEPT_LEARNED("except_learned");
+    EXCEPT_LEARNED("except_learned"),
+    LIST_SIZE("list_size");
 
     String settingModel;
 
