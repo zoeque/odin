@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">odin</string>
+    <string-array name="number_of_listed_words">
+        <item>3</item>
+        <item>5</item>
+        <item>7</item>
+        <item>10</item>
+    </string-array>
 </resources>

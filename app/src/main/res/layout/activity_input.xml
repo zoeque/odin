@@ -37,6 +37,6 @@
         android:layout_marginTop="20dp"
         android:background="#FFFFFF"
         android:text="戻る"
-        android:textColor="#0000FF" />
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>
