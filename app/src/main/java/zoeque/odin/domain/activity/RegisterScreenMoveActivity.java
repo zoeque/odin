@@ -1,4 +1,4 @@
-package zoeque.odin.component.button;
+package zoeque.odin.domain.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import zoeque.odin.MainActivity;
 import zoeque.odin.R;
 
 /**
@@ -28,7 +27,7 @@ public class RegisterScreenMoveActivity extends AppCompatActivity {
              */
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterScreenMoveActivity.this,
-                        MainActivity.class);
+                        TopScreenButtonActivity.class);
                 startActivity(intent);
             }
         });
