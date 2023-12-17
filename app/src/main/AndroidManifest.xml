@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".domain.activity.RegisterScreenMoveActivity" />
         <activity android:name=".domain.activity.MaintenanceScreenButtonActivity" />
+        <activity android:name=".domain.activity.ListScreenActivity" />
     </application>
 
 </manifest>

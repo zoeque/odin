@@ -83,8 +83,8 @@ public class MaintenanceScreenButtonActivity extends AppCompatActivity {
             }
         });
 
-        Button button = findViewById(R.id.button_to_top);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button buttonToTop = findViewById(R.id.button_to_top);
+        buttonToTop.setOnClickListener(new View.OnClickListener() {
             /**
              * The button action to move to top screen.
              *
@@ -93,6 +93,20 @@ public class MaintenanceScreenButtonActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MaintenanceScreenButtonActivity.this,
                         TopScreenButtonActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button buttonToList = findViewById(R.id.button_to_list);
+        buttonToList.setOnClickListener(new View.OnClickListener() {
+            /**
+             * The button action to move to top screen.
+             *
+             * @param v The view that was clicked.
+             */
+            public void onClick(View v) {
+                Intent intent = new Intent(MaintenanceScreenButtonActivity.this,
+                        ListScreenActivity.class);
                 startActivity(intent);
             }
         });
