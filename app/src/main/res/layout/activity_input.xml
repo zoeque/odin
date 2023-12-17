@@ -15,12 +15,14 @@
         android:id="@+id/word"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
         android:hint="単語を入力"/>
 
     <EditText
         android:id="@+id/meaning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
         android:hint="意味を入力"/>
 
     <Button
