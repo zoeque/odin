@@ -1,5 +1,6 @@
 package zoeque.odin.domain.repository;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,16 +10,36 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import io.vavr.control.Try;
 import zoeque.odin.domain.entity.IWord;
 import zoeque.odin.domain.model.OdinSettingModel;
 
-public class WordRepository extends SQLiteOpenHelper {
+/**
+ * The repository layer that performs CRUD handling for the {@link IWord} instance.
+ */
+public class WordRepository extends SQLiteOpenHelper
+        implements IRepository<IWord> {
     public WordRepository(@Nullable Context context) {
         super(context,
                 OdinSettingModel.ODIN.getSettingModel(),
                 null,
                 1);
+    }
+
+    public Try<IWord> save(IWord word) {
+        try (SQLiteDatabase db = this.getWritableDatabase()) {
+            ContentValues values = new ContentValues();
+            values.put("id", word.getWord());
+            values.put("word", word.getWord());
+            values.put("meaning", word.getMeaning());
+            values.put("learnedFlag", word.getLearnedFlag());
+            db.insert("word", null, values);
+            return Try.success(word);
+        } catch (Exception e) {
+            return Try.failure(e);
+        }
     }
 
     /**

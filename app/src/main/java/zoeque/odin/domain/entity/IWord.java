@@ -3,7 +3,7 @@ package zoeque.odin.domain.entity;
 /**
  * The interface of the word entity.
  */
-public interface IWord {
+public interface IWord extends OdinEntity{
     String getId();
 
     String getWord();
