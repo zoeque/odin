@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import zoeque.odin.R;
+import zoeque.odin.domain.repository.OdinDatabaseHelper;
 
 /**
  * The top screen component class.
@@ -18,6 +19,9 @@ public class TopScreenButtonActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        OdinDatabaseHelper dbHelper = new OdinDatabaseHelper(this);
+        dbHelper.getWritableDatabase();
 
         Button buttonToRegisterScreen = findViewById(R.id.button_to_register);
         buttonToRegisterScreen.setOnClickListener(new View.OnClickListener() {

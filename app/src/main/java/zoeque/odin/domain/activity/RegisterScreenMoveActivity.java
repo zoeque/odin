@@ -1,6 +1,8 @@
 package zoeque.odin.domain.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,12 +11,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.lang.ref.WeakReference;
 import java.util.UUID;
 
-import io.vavr.control.Try;
 import zoeque.odin.R;
 import zoeque.odin.domain.entity.IWord;
-import zoeque.odin.domain.repository.WordRepository;
+import zoeque.odin.domain.entity.Word;
+import zoeque.odin.domain.repository.OdinDatabase;
+import zoeque.odin.domain.repository.OdinDatabaseSingleTon;
+import zoeque.odin.domain.repository.WordDao;
 
 /**
  * The screen component to save new word.
@@ -24,6 +29,8 @@ public class RegisterScreenMoveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
+        OdinDatabase db = OdinDatabaseSingleTon.getInstance(getApplicationContext());
+
 
         Button registerButton = findViewById(R.id.register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -39,28 +46,17 @@ public class RegisterScreenMoveActivity extends AppCompatActivity {
 
                 String id = UUID.randomUUID().toString();
                 int learnedFlag = 0;
-                IWord newWord = new IWord.WordImpl(id, word, meaning, learnedFlag);
+                IWord newWord = new Word(word, meaning, learnedFlag);
 
                 // save the instance via repository
-                WordRepository repository = new WordRepository(RegisterScreenMoveActivity.this);
-                Try<IWord> saveTry = repository.save(newWord);
+                new DataStoreAsyncTask(RegisterScreenMoveActivity.this, db)
+                        .execute(newWord);
 
                 // show toast with the result of the saving process
-                if (saveTry.isSuccess()) {
-                    Toast.makeText(getApplicationContext(),
-                                    word + "を登録できました",
-                                    Toast.LENGTH_SHORT)
-                            .show();
-                    // clear forms
-                    wordEditText.setText("");
-                    meaningEditText.setText("");
-                } else {
-                    // failed to save
-                    Toast.makeText(getApplicationContext(),
-                                    "登録に失敗しました",
-                                    Toast.LENGTH_SHORT)
-                            .show();
-                }
+                Toast.makeText(getApplicationContext(),
+                                word + "を登録しました",
+                                Toast.LENGTH_SHORT)
+                        .show();
             }
         });
 
@@ -78,5 +74,23 @@ public class RegisterScreenMoveActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+    private class DataStoreAsyncTask extends AsyncTask<IWord, Void, Integer> {
+        private final WeakReference<Activity> weakReference;
+        private final OdinDatabase db;
+
+        public DataStoreAsyncTask(Activity activity, OdinDatabase db) {
+            this.weakReference = new WeakReference<>(activity);
+            this.db = db;
+        }
+
+        @Override
+        protected Integer doInBackground(IWord... words) {
+            WordDao wordDao = db.wordDao();
+            wordDao.insert((Word) words[0]);
+            return 0;
+        }
     }
 }
