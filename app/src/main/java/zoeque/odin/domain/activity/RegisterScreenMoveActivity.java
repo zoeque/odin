@@ -56,6 +56,8 @@ public class RegisterScreenMoveActivity extends AppCompatActivity {
                                 word + "を登録しました",
                                 Toast.LENGTH_SHORT)
                         .show();
+                wordEditText.setText("");
+                meaningEditText.setText("");
             }
         });
 
