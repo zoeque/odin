@@ -35,7 +35,12 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("io.vavr:vavr:0.10.3")
     testImplementation("junit:junit:4.13.2")
+    testImplementation ("org.mockito:mockito-core:3.6.0")
+    testImplementation ("org.mockito:mockito-junit-jupiter:3.6.0")
+    implementation ("androidx.room:room-runtime:2.0.0")
+    annotationProcessor ("androidx.room:room-compiler:2.0.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
