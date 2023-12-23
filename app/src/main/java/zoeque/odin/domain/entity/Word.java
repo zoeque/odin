@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 import java.util.UUID;
 
 @Entity
-public class Word implements IWord {
+public class Word {
     @PrimaryKey(autoGenerate = true)
     public int id;
     String word;

@@ -15,7 +15,6 @@ import java.lang.ref.WeakReference;
 import java.util.UUID;
 
 import zoeque.odin.R;
-import zoeque.odin.domain.entity.IWord;
 import zoeque.odin.domain.entity.Word;
 import zoeque.odin.domain.repository.OdinDatabase;
 import zoeque.odin.domain.repository.OdinDatabaseSingleTon;
@@ -46,10 +45,10 @@ public class RegisterScreenMoveActivity extends AppCompatActivity {
 
                 String id = UUID.randomUUID().toString();
                 int learnedFlag = 0;
-                IWord newWord = new Word(word, meaning, learnedFlag);
+                Word newWord = new Word(word, meaning, learnedFlag);
 
                 // save the instance via repository
-                new DataStoreAsyncTask(RegisterScreenMoveActivity.this, db)
+                new RegisterAsyncTask(RegisterScreenMoveActivity.this, db)
                         .execute(newWord);
 
                 // show toast with the result of the saving process
@@ -77,19 +76,19 @@ public class RegisterScreenMoveActivity extends AppCompatActivity {
     }
 
 
-    private class DataStoreAsyncTask extends AsyncTask<IWord, Void, Integer> {
+    private class RegisterAsyncTask extends AsyncTask<Word, Void, Integer> {
         private final WeakReference<Activity> weakReference;
         private final OdinDatabase db;
 
-        public DataStoreAsyncTask(Activity activity, OdinDatabase db) {
+        public RegisterAsyncTask(Activity activity, OdinDatabase db) {
             this.weakReference = new WeakReference<>(activity);
             this.db = db;
         }
 
         @Override
-        protected Integer doInBackground(IWord... words) {
+        protected Integer doInBackground(Word... words) {
             WordDao wordDao = db.wordDao();
-            wordDao.insert((Word) words[0]);
+            wordDao.insert(words[0]);
             return 0;
         }
     }

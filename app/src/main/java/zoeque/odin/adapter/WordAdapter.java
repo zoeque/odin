@@ -11,12 +11,12 @@ import android.widget.TextView;
 import java.util.List;
 
 import zoeque.odin.R;
-import zoeque.odin.domain.entity.IWord;
+import zoeque.odin.domain.entity.Word;
 
-public class WordAdapter extends ArrayAdapter<IWord> {
+public class WordAdapter extends ArrayAdapter<Word> {
     private LayoutInflater inflater;
 
-    public WordAdapter(Context context, List<IWord> words) {
+    public WordAdapter(Context context, List<Word> words) {
         super(context, 0, words);
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -27,7 +27,7 @@ public class WordAdapter extends ArrayAdapter<IWord> {
             convertView = inflater.inflate(R.layout.word_list, parent, false);
         }
 
-        IWord word = getItem(position);
+        Word word = getItem(position);
 
         CheckBox checkBox = convertView.findViewById(R.id.check_box);
         TextView textViewWord = convertView.findViewById(R.id.text_view_word);

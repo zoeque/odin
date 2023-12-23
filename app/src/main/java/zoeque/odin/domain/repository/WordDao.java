@@ -1,5 +1,6 @@
 package zoeque.odin.domain.repository;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -12,7 +13,7 @@ import zoeque.odin.domain.entity.Word;
 @Dao
 public interface WordDao {
     @Query("SELECT * FROM word")
-    List<Word> getAll();
+    LiveData<List<Word>> getAll();
 
     @Query("SELECT * FROM word WHERE id IN (:ids)")
     List<Word> loadAllByIds(int[] ids);
