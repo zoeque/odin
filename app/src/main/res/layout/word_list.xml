@@ -4,10 +4,11 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <CheckBox
-        android:id="@+id/check_box"
+    <Button
+        android:id="@+id/button_to_delete"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="削除"/>
 
     <LinearLayout
         android:layout_width="match_parent"
