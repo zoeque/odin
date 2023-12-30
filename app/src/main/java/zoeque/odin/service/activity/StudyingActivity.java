@@ -25,7 +25,7 @@ public class StudyingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.word_list_learning);
+        setContentView(R.layout.activity_study_list);
 
         OdinDatabase db = OdinDatabaseSingleTon.getInstance(getApplicationContext());
 

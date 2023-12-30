@@ -30,7 +30,7 @@ public class StudyingListAdapter extends ArrayAdapter<Word> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.word_list_maintenance, parent, false);
+            convertView = inflater.inflate(R.layout.word_list_learning, parent, false);
         }
 
         Word word = getItem(position);
