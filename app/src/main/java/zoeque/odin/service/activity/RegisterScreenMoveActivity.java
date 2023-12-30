@@ -1,4 +1,4 @@
-package zoeque.odin.domain.activity;
+package zoeque.odin.service.activity;
 
 import android.app.Activity;
 import android.content.Intent;

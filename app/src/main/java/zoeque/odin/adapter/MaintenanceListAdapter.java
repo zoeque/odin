@@ -17,11 +17,11 @@ import zoeque.odin.domain.repository.OdinDatabase;
 import zoeque.odin.domain.repository.OdinDatabaseSingleTon;
 import zoeque.odin.service.DeleteWordAsyncTaskExecutor;
 
-public class WordAdapter extends ArrayAdapter<Word> {
+public class MaintenanceListAdapter extends ArrayAdapter<Word> {
     private LayoutInflater inflater;
     Context context;
 
-    public WordAdapter(Context context, List<Word> words) {
+    public MaintenanceListAdapter(Context context, List<Word> words) {
         super(context, 0, words);
         this.context = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -30,7 +30,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.word_list, parent, false);
+            convertView = inflater.inflate(R.layout.word_list_maintenance, parent, false);
         }
 
         Word word = getItem(position);
