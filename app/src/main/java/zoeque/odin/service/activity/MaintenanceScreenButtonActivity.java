@@ -1,4 +1,4 @@
-package zoeque.odin.domain.activity;
+package zoeque.odin.service.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

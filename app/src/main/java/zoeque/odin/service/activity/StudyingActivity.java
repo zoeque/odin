@@ -1,11 +1,9 @@
-package zoeque.odin.domain.activity;
+package zoeque.odin.service.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,22 +13,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zoeque.odin.R;
-import zoeque.odin.adapter.WordAdapter;
+import zoeque.odin.adapter.MaintenanceListAdapter;
 import zoeque.odin.domain.entity.Word;
 import zoeque.odin.domain.repository.OdinDatabase;
 import zoeque.odin.domain.repository.OdinDatabaseSingleTon;
 
-public class ListScreenActivity extends AppCompatActivity {
+/**
+ * The activity class for the studying mode.
+ */
+public class StudyingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maintenance_list);
+        setContentView(R.layout.word_list_learning);
 
         OdinDatabase db = OdinDatabaseSingleTon.getInstance(getApplicationContext());
 
         // The process of list view
-        WordAdapter adapter = new WordAdapter(this, new ArrayList<>());
-        ListView listView = findViewById(R.id.list_view);
+        MaintenanceListAdapter adapter = new MaintenanceListAdapter(this, new ArrayList<>());
+        ListView listView = findViewById(R.id.list_view_study);
         listView.setAdapter(adapter);
 
         db.wordDao()
@@ -46,10 +47,10 @@ public class ListScreenActivity extends AppCompatActivity {
 
 
         // the button control to back to the top maintenance screen
-        Button buttonToMaintenanceScreen = findViewById(R.id.button_to_maintenance);
+        Button buttonToMaintenanceScreen = findViewById(R.id.button_to_top);
         buttonToMaintenanceScreen.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(ListScreenActivity.this,
+                Intent intent = new Intent(StudyingActivity.this,
                         MaintenanceScreenButtonActivity.class);
                 startActivity(intent);
             }

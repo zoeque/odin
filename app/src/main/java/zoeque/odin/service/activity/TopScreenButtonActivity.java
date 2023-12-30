@@ -1,4 +1,4 @@
-package zoeque.odin.domain.activity;
+package zoeque.odin.service.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,20 +23,17 @@ public class TopScreenButtonActivity extends AppCompatActivity {
         OdinDatabaseHelper dbHelper = new OdinDatabaseHelper(this);
         dbHelper.getWritableDatabase();
 
-        Button buttonToRegisterScreen = findViewById(R.id.button_to_register);
-        buttonToRegisterScreen.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(TopScreenButtonActivity.this,
-                        RegisterScreenMoveActivity.class);
-                startActivity(intent);
-            }
-        });
+        buttonClickToScreen(R.id.button_to_start, StudyingActivity.class);
+        buttonClickToScreen(R.id.button_to_register, RegisterScreenMoveActivity.class);
+        buttonClickToScreen(R.id.button_to_maintenance, MaintenanceScreenButtonActivity.class);
+    }
 
-        Button buttonToMaintenanceScreen = findViewById(R.id.button_to_maintenance);
-        buttonToMaintenanceScreen.setOnClickListener(new View.OnClickListener() {
+
+    private void buttonClickToScreen(int screenId, Class clazz) {
+        Button button = findViewById(screenId);
+        button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(TopScreenButtonActivity.this,
-                        MaintenanceScreenButtonActivity.class);
+                Intent intent = new Intent(TopScreenButtonActivity.this, clazz);
                 startActivity(intent);
             }
         });
