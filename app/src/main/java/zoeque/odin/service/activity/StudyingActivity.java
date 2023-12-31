@@ -14,6 +14,7 @@ import java.util.List;
 
 import zoeque.odin.R;
 import zoeque.odin.adapter.MaintenanceListAdapter;
+import zoeque.odin.adapter.StudyingListAdapter;
 import zoeque.odin.domain.entity.Word;
 import zoeque.odin.domain.repository.OdinDatabase;
 import zoeque.odin.domain.repository.OdinDatabaseSingleTon;
@@ -30,7 +31,7 @@ public class StudyingActivity extends AppCompatActivity {
         OdinDatabase db = OdinDatabaseSingleTon.getInstance(getApplicationContext());
 
         // The process of list view
-        MaintenanceListAdapter adapter = new MaintenanceListAdapter(this, new ArrayList<>());
+        StudyingListAdapter adapter = new StudyingListAdapter(this, new ArrayList<>());
         ListView listView = findViewById(R.id.list_view_study);
         listView.setAdapter(adapter);
 
@@ -46,12 +47,12 @@ public class StudyingActivity extends AppCompatActivity {
                 });
 
 
-        // the button control to back to the top maintenance screen
+        // the button control to back to the top screen
         Button buttonToMaintenanceScreen = findViewById(R.id.button_to_top);
         buttonToMaintenanceScreen.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(StudyingActivity.this,
-                        MaintenanceScreenButtonActivity.class);
+                        TopScreenButtonActivity.class);
                 startActivity(intent);
             }
         });

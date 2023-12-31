@@ -17,6 +17,9 @@ import zoeque.odin.domain.repository.OdinDatabase;
 import zoeque.odin.domain.repository.OdinDatabaseSingleTon;
 import zoeque.odin.service.DeleteWordAsyncTaskExecutor;
 
+/**
+ * The adapter class for the maintenance screen
+ */
 public class MaintenanceListAdapter extends ArrayAdapter<Word> {
     private LayoutInflater inflater;
     Context context;
@@ -43,24 +46,29 @@ public class MaintenanceListAdapter extends ArrayAdapter<Word> {
         textViewMeaning.setText(word.getMeaning());
 
         OdinDatabase db = OdinDatabaseSingleTon.getInstance(this.context);
+
+        // The button listener when the delete button pressed.
         buttonToDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DeleteWordAsyncTaskExecutor
                         .getDatabaseWriteExecutor()
                         .execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        db.wordDao().delete(word);
-                        ((Activity) context).runOnUiThread(new Runnable() {
+                            /**
+                             * Delete selected word async
+                             */
                             @Override
                             public void run() {
-                                remove(word);
-                                notifyDataSetChanged();
+                                db.wordDao().delete(word);
+                                ((Activity) context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        remove(word);
+                                        notifyDataSetChanged();
+                                    }
+                                });
                             }
                         });
-                    }
-                });
             }
         });
 
