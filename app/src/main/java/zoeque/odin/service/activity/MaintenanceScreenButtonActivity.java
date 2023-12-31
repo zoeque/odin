@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import zoeque.odin.R;
 import zoeque.odin.domain.model.OdinSettingModel;
 
+/**
+ * The maintenance screen activity component class.
+ */
 public class MaintenanceScreenButtonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

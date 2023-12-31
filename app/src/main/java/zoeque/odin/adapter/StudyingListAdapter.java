@@ -1,12 +1,10 @@
 package zoeque.odin.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,8 +13,10 @@ import zoeque.odin.R;
 import zoeque.odin.domain.entity.Word;
 import zoeque.odin.domain.repository.OdinDatabase;
 import zoeque.odin.domain.repository.OdinDatabaseSingleTon;
-import zoeque.odin.service.DeleteWordAsyncTaskExecutor;
 
+/**
+ * The adapter class for the studying screen.
+ */
 public class StudyingListAdapter extends ArrayAdapter<Word> {
     private LayoutInflater inflater;
     Context context;
