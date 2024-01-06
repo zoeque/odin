@@ -48,6 +48,7 @@ public class StudyingListAdapter extends ArrayAdapter<Word> {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // save the state with true/false on the checkbox
                 if (isChecked) {
                     word.updateLearnedFlag(1);
                 } else {
@@ -58,6 +59,7 @@ public class StudyingListAdapter extends ArrayAdapter<Word> {
                         .execute(new Runnable() {
                             @Override
                             public void run() {
+                                // update the state async
                                 db.wordDao().update(word);
                             }
                         });
