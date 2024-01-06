@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -18,12 +19,18 @@ public interface WordDao {
     @Query("SELECT * FROM word WHERE id IN (:ids)")
     List<Word> loadAllByIds(int[] ids);
 
-    @Insert
-    void insertAll(Word... accessTimes);
+    @Query("SELECT * FROM word where learnedFlag = 0")
+    LiveData<List<Word>> getNotLearnedWords();
 
     @Insert
-    void insert(Word accessTime);
+    void insertAll(Word... targets);
+
+    @Insert
+    void insert(Word target);
 
     @Delete
-    void delete(Word accessTime);
+    void delete(Word target);
+
+    @Update
+    void update(Word word);
 }

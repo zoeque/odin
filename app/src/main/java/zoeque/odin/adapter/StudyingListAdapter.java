@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import zoeque.odin.R;
 import zoeque.odin.domain.entity.Word;
 import zoeque.odin.domain.repository.OdinDatabase;
 import zoeque.odin.domain.repository.OdinDatabaseSingleTon;
+import zoeque.odin.service.DeleteWordAsyncTaskExecutor;
 
 /**
  * The adapter class for the studying screen.
@@ -35,10 +38,33 @@ public class StudyingListAdapter extends ArrayAdapter<Word> {
 
         Word word = getItem(position);
 
+        CheckBox checkBox = convertView.findViewById(R.id.checkbox_learning);
         TextView textViewWord = convertView.findViewById(R.id.text_view_study_word);
         textViewWord.setText(word.getWord());
         OdinDatabase db = OdinDatabaseSingleTon.getInstance(this.context);
 
+        // set true if the word is already learned state
+        checkBox.setChecked(word.getLearnedFlag() == 1);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // save the state with true/false on the checkbox
+                if (isChecked) {
+                    word.updateLearnedFlag(1);
+                } else {
+                    word.updateLearnedFlag(0);
+                }
+                DeleteWordAsyncTaskExecutor
+                        .getDatabaseWriteExecutor()
+                        .execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                // update the state async
+                                db.wordDao().update(word);
+                            }
+                        });
+            }
+        });
         return convertView;
     }
 }
