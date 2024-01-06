@@ -1,10 +1,7 @@
 package zoeque.odin.domain.entity;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import java.util.UUID;
 
 @Entity
 public class Word {
@@ -61,5 +58,15 @@ public class Word {
 
     public int getLearnedFlag() {
         return this.learnedFlag;
+    }
+
+    public Word updateLearnedFlag(int learnedFlag) {
+        if (!(learnedFlag == 0 || learnedFlag == 1)) {
+            throw new IllegalArgumentException(
+                    "Learned flag must be 0 or 1 : " + learnedFlag
+            );
+        }
+        this.learnedFlag = learnedFlag;
+        return this;
     }
 }
