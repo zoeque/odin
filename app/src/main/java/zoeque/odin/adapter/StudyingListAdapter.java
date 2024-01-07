@@ -13,6 +13,7 @@ import java.util.List;
 
 import zoeque.odin.R;
 import zoeque.odin.domain.entity.Word;
+import zoeque.odin.domain.model.WordModel;
 import zoeque.odin.domain.repository.OdinDatabase;
 import zoeque.odin.domain.repository.OdinDatabaseSingleTon;
 import zoeque.odin.service.DeleteWordAsyncTaskExecutor;
@@ -44,15 +45,15 @@ public class StudyingListAdapter extends ArrayAdapter<Word> {
         OdinDatabase db = OdinDatabaseSingleTon.getInstance(this.context);
 
         // set true if the word is already learned state
-        checkBox.setChecked(word.getLearnedFlag() == 1);
+        checkBox.setChecked(word.getLearnedFlag() == WordModel.LEARNED_STATE);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // save the state with true/false on the checkbox
                 if (isChecked) {
-                    word.updateLearnedFlag(1);
+                    word.updateLearnedFlag(WordModel.LEARNED_STATE);
                 } else {
-                    word.updateLearnedFlag(0);
+                    word.updateLearnedFlag(WordModel.NOT_LEARNED_STATE);
                 }
                 DeleteWordAsyncTaskExecutor
                         .getDatabaseWriteExecutor()
