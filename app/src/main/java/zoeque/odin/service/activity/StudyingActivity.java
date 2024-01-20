@@ -1,6 +1,7 @@
 package zoeque.odin.service.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import zoeque.odin.R;
 import zoeque.odin.adapter.MaintenanceListAdapter;
 import zoeque.odin.adapter.StudyingListAdapter;
 import zoeque.odin.domain.entity.Word;
+import zoeque.odin.domain.model.OdinSettingModel;
 import zoeque.odin.domain.repository.OdinDatabase;
 import zoeque.odin.domain.repository.OdinDatabaseSingleTon;
 
@@ -41,11 +43,11 @@ public class StudyingActivity extends AppCompatActivity {
                     @Override
                     public void onChanged(List<Word> allWords) {
                         adapter.clear();
-                        adapter.addAll(allWords);
+                        // set words with defined amounts
+                        adapter.addAll(copyListWithDefinedSize(allWords));
                         adapter.notifyDataSetChanged();
                     }
                 });
-
 
         // the button control to back to the top screen
         Button buttonToMaintenanceScreen = findViewById(R.id.button_to_top);
@@ -56,5 +58,17 @@ public class StudyingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private List<Word> copyListWithDefinedSize(List<Word> allWords){
+        List<Word> wordList = new ArrayList<>();
+        SharedPreferences preferences = getSharedPreferences(OdinSettingModel.SETTING.getSettingModel(), 0);
+        // TODO 設定値を取得する
+        int selectedSize
+                = preferences.getInt(OdinSettingModel.LIST_SIZE.getSettingModel(), 0);
+        for (int i = 0; i < selectedSize && i < allWords.size(); i++) {
+            wordList.add(allWords.get(i));
+        }
+        return wordList;
     }
 }

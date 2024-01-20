@@ -11,7 +11,8 @@ public enum OdinSettingModel {
     ODIN("zoeque_odin"),
     RANDOM_ORDER("random_order"),
     EXCEPT_LEARNED("except_learned"),
-    LIST_SIZE("list_size");
+    LIST_SIZE("list_size"),
+    LIST_IDX("list_idx");
 
     String settingModel;
 

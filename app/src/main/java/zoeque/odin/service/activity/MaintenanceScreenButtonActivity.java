@@ -69,7 +69,7 @@ public class MaintenanceScreenButtonActivity extends AppCompatActivity {
 
         // The spinner of the size of the list
         Spinner spinner = findViewById(R.id.spinner_list_size);
-        int selectedSize = preferences.getInt(OdinSettingModel.LIST_SIZE.getSettingModel(), 0);
+        int selectedSize = preferences.getInt(OdinSettingModel.LIST_IDX.getSettingModel(), 0);
         spinner.setSelection(selectedSize);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -78,7 +78,9 @@ public class MaintenanceScreenButtonActivity extends AppCompatActivity {
                 SharedPreferences settings
                         = getSharedPreferences(OdinSettingModel.SETTING.getSettingModel(), 0);
                 SharedPreferences.Editor editor = settings.edit();
-                editor.putInt(OdinSettingModel.LIST_SIZE.getSettingModel(), pos);
+                int selectedValue = Integer.parseInt(spinner.getSelectedItem().toString());
+                editor.putInt(OdinSettingModel.LIST_IDX.getSettingModel(), pos);
+                editor.putInt(OdinSettingModel.LIST_SIZE.getSettingModel(), selectedValue);
                 editor.apply();
             }
 
