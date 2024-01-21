@@ -12,7 +12,8 @@ public enum OdinSettingModel {
     RANDOM_ORDER("random_order"),
     EXCEPT_LEARNED("except_learned"),
     LIST_SIZE("list_size"),
-    LIST_IDX("list_idx");
+    LIST_IDX("list_idx"),
+    LIST_STUDYING_IDX("list_studying_idx");
 
     String settingModel;
 
