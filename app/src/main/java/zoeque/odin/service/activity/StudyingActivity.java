@@ -60,6 +60,31 @@ public class StudyingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // button for the next word list
+        Button buttonNext = findViewById(R.id.button_to_next_word_list);
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                db.wordDao()
+                        .getAll()
+                        .observe(StudyingActivity.this, new Observer<List<Word>>() {
+                            @Override
+                            public void onChanged(List<Word> allWords) {
+                                adapter.clear();
+                                // set words with defined amounts
+                                List<Word> wordList = copyListWithDefinedSize(allWords);
+                                // back to top screen if the word is nothing in the showing list
+                                if (wordList.isEmpty()) {
+                                    Intent intent = new Intent(StudyingActivity.this,
+                                            TopScreenButtonActivity.class);
+                                    startActivity(intent);
+                                }
+                                adapter.addAll(wordList);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+            }
+        });
     }
 
     private List<Word> copyListWithDefinedSize(List<Word> allWords) {
@@ -68,17 +93,18 @@ public class StudyingActivity extends AppCompatActivity {
         int selectedSize
                 = preferences.getInt(OdinSettingModel.LIST_SIZE.getSettingModel(), 0);
         int startIdx = preferences.getInt(OdinSettingModel.LIST_STUDYING_IDX.getSettingModel(), 0);
-        for (int i = startIdx; i < selectedSize && i < allWords.size(); i++) {
+        for (int i = startIdx; i < startIdx + selectedSize && i < allWords.size(); i++) {
             wordList.add(allWords.get(i));
-            updateListIdx(i);
+            updateListIdx(i + 1);
         }
         return wordList;
     }
 
-    private void updateListIdx(int idx){
+    private void updateListIdx(int idx) {
         SharedPreferences settings
                 = getSharedPreferences(OdinSettingModel.SETTING.getSettingModel(), 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt(OdinSettingModel.LIST_STUDYING_IDX.getSettingModel(), idx);
+        editor.apply();
     }
 }
