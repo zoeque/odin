@@ -3,6 +3,11 @@ package zoeque.odin.domain.entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * The entity class of Word.
+ * The class holds the pair of the word and its meaning.
+ * Word entity holds the learned state with 0, not learned and learned, 1.
+ */
 @Entity
 public class Word {
     @PrimaryKey(autoGenerate = true)

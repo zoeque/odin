@@ -87,6 +87,14 @@ public class StudyingActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Process that copy the word list with the size of defined in settings.
+     * If the size is given with 5, the returned value is set with 5 words in the list.
+     * The size and IDX of the List holds all words is saved in Database.
+     *
+     * @param allWords The all words saved in Database.
+     * @return The list of words with given size option.
+     */
     private List<Word> copyListWithDefinedSize(List<Word> allWords) {
         List<Word> wordList = new ArrayList<>();
         SharedPreferences preferences = getSharedPreferences(OdinSettingModel.SETTING.getSettingModel(), 0);
@@ -94,8 +102,9 @@ public class StudyingActivity extends AppCompatActivity {
                 = preferences.getInt(OdinSettingModel.LIST_SIZE.getSettingModel(), 0);
         int startIdx = preferences.getInt(OdinSettingModel.LIST_STUDYING_IDX.getSettingModel(), 0);
         for (int i = startIdx; i < startIdx + selectedSize && i < allWords.size(); i++) {
-            wordList.add(allWords.get(i));
+            Word word = allWords.get(i);
             updateListIdx(i + 1);
+            wordList.add(word);
         }
         return wordList;
     }
